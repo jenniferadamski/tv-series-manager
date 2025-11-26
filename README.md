@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Overview
 
-## Getting Started
+## But de l'application
 
-First, run the development server:
+TV Series Manager est une application web permettant aux utilisateurs de découvrir de nouvelles séries à regarder, de retrouver celles qu'ils aiment, de garder une trace de leur progression de visionnage d'une série, et de gérer leurs favoris.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Fonctionnalités principales
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Recherche de séries TV (avec filtres avancées)
+* Page détail d'une série (saisons, épisodes, synopsis, ...)
+* Liste de séries populaires
+* Gestion locale des favoris (Ajout / Suppression) et de leur visionnage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Stack technique
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Next.js / React
+* TypeScript
+* Tailwind CSS
 
-## Learn More
+## Objectif d'apprentissage
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+L'objectif était de démontrer ma capacité à concevoir une application front complète, en illustrant ma maîtrise de React/TS, du state management, des appels API, du routing, et de la création de composants réutilisables.
