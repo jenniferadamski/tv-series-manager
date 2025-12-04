@@ -16,6 +16,7 @@ TV Series Manager est une application web permettant aux utilisateurs de découv
 * Next.js / React
 * TypeScript
 * Tailwind CSS
+* FontAwesome
 
 ## Objectif d'apprentissage
 

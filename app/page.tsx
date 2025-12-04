@@ -1,7 +1,9 @@
+import MainTitle from "./_components/MainTitle";
+
 export default function Home() {
     return (
-        <div>
-            <h1>TV Series Manager</h1>
-        </div>
+        <section className="flex-[1_0_auto]">
+            <MainTitle title={"Séries populaires"} />
+        </section>
     );
 }

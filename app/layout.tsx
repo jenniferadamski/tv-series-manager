@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Raleway } from "next/font/google";
+import Header from "./_components/Header";
+import Footer from "./_components/Footer";
 import "./globals.css";
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+const raleway = Raleway({
     subsets: ["latin"],
 });
 
@@ -17,17 +13,13 @@ export const metadata: Metadata = {
     description: "Une application pour trouver et gérer des séries TV",
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
     return (
-        <html lang="fr">
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
+        <html lang="fr" className="bg-[#ececec] h-full">
+            <body className={`${raleway.className} h-full flex flex-col`}>
+                <Header />
                 {children}
+                <Footer />
             </body>
         </html>
     );
