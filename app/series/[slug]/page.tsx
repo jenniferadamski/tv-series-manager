@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import MainTitle from "@/app/_components/MainTitle";
+import MainTitle from "@/app/_components/ui/MainTitle";
 
 // AJOUTER DANS LE TITLE UNE VARIABLE DYNAMIQUE QUI RECUPERE LE NOM DE LA SERIE SI POSSIBLE
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Detail() {
     return (
-        <section className="flex-[1_0_auto]">
+        <section className="flex-[1_0_auto] mx-5">
             <MainTitle title={"Série"} />
         </section>
     )

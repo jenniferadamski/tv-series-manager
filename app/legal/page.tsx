@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import MainTitle from "../_components/MainTitle";
+import MainTitle from "../_components/ui/MainTitle";
 
 export const metadata: Metadata = {
     title: "Mentions légales | TV Series Manager",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function Legal() {
     return (
-        <section className="flex-[1_0_auto]">
+        <section className="flex-[1_0_auto] mx-5">
             <MainTitle title={"Mentions légales"} />
         </section>
     )
