@@ -4,6 +4,6 @@ interface MainTitleProps {
 
 export default function MainTitle({ title }: MainTitleProps) {
     return (
-        <h1 className="text-xl font-medium mb-5">{title}</h1>
+        <h1 className="text-xl text-[#0f396d] font-bold mb-5">{title}</h1>
     )
 }

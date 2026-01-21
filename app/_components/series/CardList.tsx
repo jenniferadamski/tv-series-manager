@@ -1,8 +1,10 @@
 import Card from "./Card";
 import { Series } from "@/types/series";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 async function getPopularSeries() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/popular`, {
+    const res = await fetch(`${baseUrl}/api/popular`, {
         next: { revalidate: 60 },
     });
 

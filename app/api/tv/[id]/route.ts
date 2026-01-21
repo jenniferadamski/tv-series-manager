@@ -3,7 +3,8 @@ import { tmdb } from "@/lib/tmdb";
 import type { TmdbSeriesDetails } from "@/types/tmdb";
 import { SeriesDetails } from "@/types/seriesDetails";
 
-export async function GET(_request: Request, { params }: { params: { id: string } }){
+export async function GET(_request: Request, props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     const seriesId = params.id;
     const seriesDetailsData = await tmdb<TmdbSeriesDetails>(`/tv/${seriesId}`);
 
@@ -30,6 +31,6 @@ export async function GET(_request: Request, { params }: { params: { id: string 
             year: season.air_date?.slice(0, 4) ?? null,
         })),
     };
-    
+
     return NextResponse.json(seriesDetails);
 }

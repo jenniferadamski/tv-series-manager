@@ -11,3 +11,9 @@
         "wdth" 100,
         "CTRS" 0;
 }
+
+.showDetails {
+    h1 {
+        margin-bottom: 5px;
+    }
+}
