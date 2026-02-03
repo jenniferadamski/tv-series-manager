@@ -1,4 +1,4 @@
-export interface TmdbPopularSeries {
+export interface TmdbSeries {
     id: number;
     name: string;
     poster_path: string | null;
@@ -7,8 +7,8 @@ export interface TmdbPopularSeries {
     vote_average: number;
 }
 
-export interface TmdbPopularSeriesResponse {
-    results: TmdbPopularSeries[];
+export interface TmdbSeriesResponse {
+    results: TmdbSeries[];
 }
 
 export interface TmdbGenre {

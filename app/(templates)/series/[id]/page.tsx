@@ -27,7 +27,7 @@ interface DetailProps {
     params: Promise<{ id: string; }>;
 }
 
-// AJOUTER DANS LE TITLE UNE VARIABLE DYNAMIQUE QUI RECUPERE LE NOM DE LA SERIE
+// AJOUTER DANS LE TITLE UNE VARIABLE DYNAMIQUE QUI RECUPERE LE NOM DE LA SERIE SI POSSIBLE
 export const metadata: Metadata = {
     title: "TV Series Manager",
     description: "Retrouvez toutes les informations détaillées sur la série",
@@ -80,3 +80,13 @@ export default async function DetailPage(props: DetailProps) {
         </section>
     )
 }
+
+
+
+//     seasons: {
+//       id: number;
+//       name: string;
+//       seasonNumber: number;
+//       episodes: number;
+//       year: string | null;
+//     }[];

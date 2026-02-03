@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { tmdb } from "@/lib/tmdb";
-import type { TmdbPopularSeriesResponse, TmdbGenreResponse } from "@/types/tmdb";
+import type { TmdbSeriesResponse, TmdbGenreResponse } from "@/types/tmdb";
 import type { Series } from "@/types/series";
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
         genreData.genres.map((genre) => [genre.id, genre.name])
     );
 
-    const popularSeriesData = await tmdb<TmdbPopularSeriesResponse>("/tv/popular"); 
+    const popularSeriesData = await tmdb<TmdbSeriesResponse>("/tv/popular"); 
 
     const popularSeries: Series[] = popularSeriesData.results.map((show) => ({
         id: show.id,

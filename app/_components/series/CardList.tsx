@@ -1,19 +1,11 @@
 import Card from "./Card";
 import { Series } from "@/types/series";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-
-async function getPopularSeries() {
-    const res = await fetch(`${baseUrl}/api/popular`, {
-        next: { revalidate: 60 },
-    });
-
-    return res.json();
+interface CardListProps {
+    series: Series[];
 }
 
-export default async function CardList() {
-    const series = await getPopularSeries();
-
+export default function CardList({ series }: CardListProps) {
     return (
         <ul className="flex flex-row justify-between flex-wrap">
             {series.map((serie: Series) => (
