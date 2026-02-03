@@ -5,10 +5,10 @@ import Logo from "./Logo";
 
 export default function Header() {
     return (
-        <div className="mt-6 mb-6 mx-5 w-full flex flex-row items-center">
+        <div className="my-6 lg:mt-8 lg:mb-12 ml-5 md:ml-0 mr-0 flex flex-row items-center md:justify-between">
             <Logo />
 
-            <nav className="flex flex-row w-3/4 justify-evenly">
+            <nav className="flex flex-row w-3/4 md:w-1/2 justify-evenly">
                 <Link href="/search"><FontAwesomeIcon icon={faMagnifyingGlass} width="30" /></Link>
                 <Link href="favorites"><FontAwesomeIcon icon={faHeart} width="30" /></Link>
                 <div><FontAwesomeIcon icon={faCircleHalfStroke} width="30" /></div>

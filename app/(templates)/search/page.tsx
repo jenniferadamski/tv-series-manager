@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import MainTitle from "../_components/ui/MainTitle";
+import MainTitle from "@/app/_components/ui/MainTitle";
 
 export const metadata: Metadata = {
     title: " Rechercher une série | TV Series Manager",

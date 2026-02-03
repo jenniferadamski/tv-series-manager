@@ -72,6 +72,8 @@ export default async function DetailPage(props: DetailProps) {
                 <span>Nombre d&apos;épisodes: {currentShow.episodesCount}</span>
                 {currentShow.runtime && <span>Durée moyenne d&apos;un épisode : {currentShow.runtime} minutes</span>}
                 <span>Statut : {currentShow.inProduction ? "en cours" : "terminée"}</span>
+
+                {/* TODO : s'assurer que l'année de fin ne soit pas la même que l'année de début, sinon n'écrire l'année qu'une fois */}
                 <span>Diffusion : {currentShow.inProduction ?
                     `Depuis ${currentShow.firstAirYear}` :
                     `${currentShow.firstAirYear} - ${currentShow.lastAirYear}`}
