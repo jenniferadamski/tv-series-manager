@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function Legal() {
     return (
-        <section className="flex-[1_0_auto] mx-5">
+        <section className="flex-[1_0_auto] mx-5 md:mx-8 lg:mx-10 xl:mx-15">
             <MainTitle title={"Mentions légales"} />
         </section>
     )

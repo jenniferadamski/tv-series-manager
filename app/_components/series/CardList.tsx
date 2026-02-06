@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import Card from "./Card";
+import CardListSkeleton from "./CardListSkeleton";
 import { Series } from "@/types/series";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -15,18 +17,20 @@ export default async function CardList() {
     const series = await getPopularSeries();
 
     return (
-        <ul className="flex flex-row justify-between flex-wrap">
-            {series.map((serie: Series) => (
-                <Card
-                    id={serie.id}
-                    key={serie.id}
-                    title={serie.title}
-                    poster={serie.poster}
-                    year={serie.year}
-                    genres={serie.genres}
-                    rating={serie.rating}
-                />
-            ))}
-        </ul>
+        <Suspense fallback={<CardListSkeleton />}>
+            <ul className="flex flex-row justify-between flex-wrap">
+                {series.map((serie: Series) => (
+                    <Card
+                        id={serie.id}
+                        key={serie.id}
+                        title={serie.title}
+                        poster={serie.poster}
+                        year={serie.year}
+                        genres={serie.genres}
+                        rating={serie.rating}
+                    />
+                ))}
+            </ul>
+        </Suspense>
     )
 }
