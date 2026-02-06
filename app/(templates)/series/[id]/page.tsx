@@ -1,9 +1,11 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import DetailElement from "@/app/_components/ui/DetailElement";
 import MainTitle from "@/app/_components/ui/MainTitle";
 import { SeriesDetails } from "@/types/seriesDetails";
 import truncateGenres from "@/lib/formatters";
+import posterAlternative from "@/public/assets/poster-not-available.jpg";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
@@ -37,47 +39,44 @@ export default async function DetailPage(props: DetailProps) {
     const params = await props.params;
     const currentShow = await getCurrentShow(params.id);
     const genresList = truncateGenres(currentShow.genres, 10);
+    const airDates = currentShow.firstAirYear === currentShow.lastAirYear ? currentShow.firstAirYear : `${currentShow.firstAirYear} - ${currentShow.lastAirYear}`;
 
     return (
-        <section className="flex-[1_0_auto] mx-5 showDetails">
+        <section className="flex-[1_0_auto] mx-5 md:mx-8 lg:mx-10 xl:mx-15 showDetails">
             <div className="flex flex-col items-center justify-center">
                 <MainTitle title={currentShow.title} />
                 {currentShow.title != currentShow.originalTitle && <span>(Titre original&nbsp;:&nbsp;{currentShow.originalTitle})</span>}
 
-                {/* TO DO : Mettre dans le dossier public une image de placeholder dans le cas où y'a pas de poster et faire src={currentShow.poster ?? "/poster-placeholder.png"} */}
-
-                {currentShow.poster && (
-                    <Image
-                        src={currentShow.poster}
-                        alt={`Affiche de la série ${currentShow.title}`}
-                        height={300}
-                        width={200}
-                        className="my-5"
-                    />
-                )}
+                <Image
+                    src={currentShow.poster ? currentShow.poster : posterAlternative}
+                    alt={`Affiche de la série ${currentShow.title}`}
+                    height={300}
+                    width={200}
+                    className="my-5"
+                />
 
                 {/* @todo ajouter note */}
             </div>
 
-            <div className="flex flex-col">
-                <span className="font-bold">Synopsis&nbsp;:&nbsp;</span>
-                <p>{currentShow.overview}</p>
-            </div>
+            {currentShow.overview &&
+                <div className="flex flex-col mb-2">
+                    <span className="font-bold text-[#0f396d]">Synopsis&nbsp;:&nbsp;</span>
+                    <p>{currentShow.overview}</p>
+                </div>
+            }
 
-            <div className="flex flex-col justify-center">
-                <span>Genres : {genresList}</span>
-                <span>Créateur(s) : {currentShow.creators.join(", ")}</span>
-                <span>Pays d&apos;origine : {currentShow.countries.join(", ")}</span>
-                <span>Nombre de saisons : {currentShow.seasonsCount}</span>
-                <span>Nombre d&apos;épisodes: {currentShow.episodesCount}</span>
-                {currentShow.runtime && <span>Durée moyenne d&apos;un épisode : {currentShow.runtime} minutes</span>}
-                <span>Statut : {currentShow.inProduction ? "en cours" : "terminée"}</span>
-
-                {/* TODO : s'assurer que l'année de fin ne soit pas la même que l'année de début, sinon n'écrire l'année qu'une fois */}
-                <span>Diffusion : {currentShow.inProduction ?
-                    `Depuis ${currentShow.firstAirYear}` :
-                    `${currentShow.firstAirYear} - ${currentShow.lastAirYear}`}
-                </span>
+            <div className="flex flex-col justify-center mb-6">
+                <DetailElement elementTitle="Créateur(s)" element={currentShow.creators.join(", ")} />
+                <DetailElement elementTitle="Genres" element={genresList} />
+                <DetailElement elementTitle="Pays d&apos;origine" element={currentShow.countries.join(", ")} />
+                <DetailElement elementTitle="Statut" element={currentShow.inProduction ? "en cours" : "terminée"} />
+                <DetailElement
+                    elementTitle="Diffusion"
+                    element={currentShow.inProduction ? `Depuis ${currentShow.firstAirYear}` : `${airDates}`}
+                />
+                <DetailElement elementTitle="Nombre de saisons" element={currentShow.seasonsCount} />
+                <DetailElement elementTitle="Nombre d&apos;épisodes" element={currentShow.episodesCount} />
+                {currentShow.runtime && <DetailElement elementTitle="Durée moyenne d&apos;un épisode" element={`${currentShow.runtime} minutes`} />}
             </div>
         </section>
     )
