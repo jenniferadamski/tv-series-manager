@@ -42,4 +42,5 @@ export interface TmdbSeriesDetails {
         episode_count: number;
         air_date: string | null;
     }[];
+    vote_average: number;
 }

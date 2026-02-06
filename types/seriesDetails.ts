@@ -20,4 +20,5 @@ export interface SeriesDetails {
       episodes: number;
       year: string | null;
     }[];
+    rating: number;
 }

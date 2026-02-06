@@ -40,6 +40,7 @@ export default async function DetailPage(props: DetailProps) {
     const currentShow = await getCurrentShow(params.id);
     const genresList = truncateGenres(currentShow.genres, 10);
     const airDates = currentShow.firstAirYear === currentShow.lastAirYear ? currentShow.firstAirYear : `${currentShow.firstAirYear} - ${currentShow.lastAirYear}`;
+    const stars_rating = "⭐".repeat(currentShow.rating);
 
     return (
         <section className="flex-[1_0_auto] mx-5 md:mx-8 lg:mx-10 xl:mx-15 showDetails">
@@ -55,7 +56,7 @@ export default async function DetailPage(props: DetailProps) {
                     className="my-5"
                 />
 
-                {/* @todo ajouter note */}
+                <div className="mb-5">{stars_rating}</div>
             </div>
 
             {currentShow.overview &&

@@ -30,6 +30,7 @@ export async function GET(_request: Request, props: { params: Promise<{ id: stri
             episodes: season.episode_count,
             year: season.air_date?.slice(0, 4) ?? null,
         })),
+        rating: Math.round(seriesDetailsData.vote_average / 2),
     };
 
     return NextResponse.json(seriesDetails);
