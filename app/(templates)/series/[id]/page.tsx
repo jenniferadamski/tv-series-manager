@@ -2,15 +2,18 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import DetailElement from "@/app/_components/ui/DetailElement";
+import FavoriteButton from "@/app/_components/series/FavoriteButton";
 import MainTitle from "@/app/_components/ui/MainTitle";
 import { SeriesDetails } from "@/types/seriesDetails";
 import truncateGenres from "@/lib/formatters";
+import { simplifiedSeriesDetails } from "@/lib/mappers";
 import posterAlternative from "@/public/assets/poster-not-available.jpg";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-
 async function getCurrentShow(id: string): Promise<SeriesDetails> {
-    const res = await fetch(`${baseUrl}/api/tv/${id}`, {
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const url = `${origin}/api/tv/${id}`;
+
+    const res = await fetch(url, {
         next: { revalidate: 60 },
     });
 
@@ -19,7 +22,8 @@ async function getCurrentShow(id: string): Promise<SeriesDetails> {
     }
 
     if (!res.ok) {
-        throw new Error("Failed to fetch series details");
+        console.log(`Fetch failed for URL: ${url} (Status: ${res.status})`);
+        throw new Error(`Failed fetch. Error Status: ${res.status})`);
     }
 
     return res.json();
@@ -29,7 +33,7 @@ interface DetailProps {
     params: Promise<{ id: string; }>;
 }
 
-// AJOUTER DANS LE TITLE UNE VARIABLE DYNAMIQUE QUI RECUPERE LE NOM DE LA SERIE
+// AJOUTER DANS LE TITLE UNE VARIABLE DYNAMIQUE QUI RECUPERE LE NOM DE LA SERIE SI POSSIBLE
 export const metadata: Metadata = {
     title: "TV Series Manager",
     description: "Retrouvez toutes les informations détaillées sur la série",
@@ -41,6 +45,7 @@ export default async function DetailPage(props: DetailProps) {
     const genresList = truncateGenres(currentShow.genres, 10);
     const airDates = currentShow.firstAirYear === currentShow.lastAirYear ? currentShow.firstAirYear : `${currentShow.firstAirYear} - ${currentShow.lastAirYear}`;
     const stars_rating = "⭐".repeat(currentShow.rating);
+    const simplifiedSeries = simplifiedSeriesDetails(currentShow);
 
     return (
         <section className="flex-[1_0_auto] mx-5 md:mx-8 lg:mx-10 xl:mx-15 showDetails">
@@ -66,7 +71,7 @@ export default async function DetailPage(props: DetailProps) {
                 </div>
             }
 
-            <div className="flex flex-col justify-center mb-6">
+            <div className="flex flex-col justify-center mb-5">
                 <DetailElement elementTitle="Créateur(s)" element={currentShow.creators.join(", ")} />
                 <DetailElement elementTitle="Genres" element={genresList} />
                 <DetailElement elementTitle="Pays d&apos;origine" element={currentShow.countries.join(", ")} />
@@ -78,6 +83,10 @@ export default async function DetailPage(props: DetailProps) {
                 <DetailElement elementTitle="Nombre de saisons" element={currentShow.seasonsCount} />
                 <DetailElement elementTitle="Nombre d&apos;épisodes" element={currentShow.episodesCount} />
                 {currentShow.runtime && <DetailElement elementTitle="Durée moyenne d&apos;un épisode" element={`${currentShow.runtime} minutes`} />}
+            </div>
+
+            <div className="mb-6">
+                <FavoriteButton show={simplifiedSeries} />
             </div>
         </section>
     )

@@ -10,7 +10,7 @@ export default function Header() {
 
             <nav className="flex flex-row w-3/4 md:w-1/2 justify-evenly">
                 <Link href="/search"><FontAwesomeIcon icon={faMagnifyingGlass} width="30" /></Link>
-                <Link href="favorites"><FontAwesomeIcon icon={faHeart} width="30" /></Link>
+                <Link href="/favorites"><FontAwesomeIcon icon={faHeart} width="30" /></Link>
                 <div><FontAwesomeIcon icon={faCircleHalfStroke} width="30" /></div>
             </nav>
         </div>
