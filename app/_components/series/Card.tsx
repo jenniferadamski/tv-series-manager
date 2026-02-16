@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Series } from "@/types/series";
 import truncateGenres from "@/lib/formatters";
+import type { Series } from "@/types/series";
 import posterAlternative from "@/public/assets/poster-not-available.jpg";
 
 export default function Card({ id, title, poster, year, genres, rating }: Series) {
@@ -18,7 +18,7 @@ export default function Card({ id, title, poster, year, genres, rating }: Series
                     width={500}
                     className="min-h-[236px] md:min-h-[340px] min-[51rem]:min-h-[400px] min-[59rem]:min-h-[420px] min-[62rem]:min-h-[428px] lg:min-h-[420px] m-auto object-cover bg-neutral-200"
                 />
-                <div className="h-[12rem] bg-white flex flex-col justify-around items-center text-center rounded-b-lg">
+                <div className="h-[12rem] bg-white flex flex-col justify-around items-center text-center rounded-b-lg px-2">
                     <div>
                         <h2 className="text-base font-semibold">{title}</h2>
                         <span>{year}</span>

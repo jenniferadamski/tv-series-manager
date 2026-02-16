@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Card from "./Card";
 import CardListSkeleton from "./CardListSkeleton";
-import { Series } from "@/types/series";
+import type { Series } from "@/types/series";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 

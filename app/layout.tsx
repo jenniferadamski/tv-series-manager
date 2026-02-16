@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import Header from "./_components/ui/Header";
 import Footer from "./_components/ui/Footer";
-import { FavoritesProvider } from "@/context/FavoritesContext";
+import { ListsProvider } from "@/context/ListsContext";
 import "./globals.css";
 
 const raleway = Raleway({
@@ -18,11 +18,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="fr" className="bg-[#ececec] h-screen">
             <body className={`${raleway.className} h-full flex flex-col`}>
-                <FavoritesProvider>
+                <ListsProvider>
                     <Header />
                     {children}
                     <Footer />
-                </FavoritesProvider>
+                </ListsProvider>
             </body>
         </html>
     );

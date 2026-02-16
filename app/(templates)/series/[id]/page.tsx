@@ -2,9 +2,9 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import DetailElement from "@/app/_components/ui/DetailElement";
-import FavoriteButton from "@/app/_components/series/FavoriteButton";
 import MainTitle from "@/app/_components/ui/MainTitle";
-import { SeriesDetails } from "@/types/seriesDetails";
+import SeriesButton from "@/app/_components/series/SeriesButton";
+import type { SeriesDetails } from "@/types/seriesDetails";
 import truncateGenres from "@/lib/formatters";
 import { simplifiedSeriesDetails } from "@/lib/mappers";
 import posterAlternative from "@/public/assets/poster-not-available.jpg";
@@ -86,7 +86,7 @@ export default async function DetailPage(props: DetailProps) {
             </div>
 
             <div className="mb-6">
-                <FavoriteButton show={simplifiedSeries} />
+                <SeriesButton show={simplifiedSeries} />
             </div>
         </section>
     )
