@@ -18,7 +18,7 @@ export default function Card({ id, title, poster, year, genres, rating }: Series
                     width={500}
                     className="min-h-[236px] md:min-h-[340px] min-[51rem]:min-h-[400px] min-[59rem]:min-h-[420px] min-[62rem]:min-h-[428px] lg:min-h-[420px] m-auto object-cover bg-neutral-200"
                 />
-                <div className="h-[12rem] bg-white flex flex-col justify-around items-center text-center rounded-b-lg px-2">
+                <div className="h-48 bg-white dark:bg-[#4c5360] dark:text-[#EBECF0] flex flex-col justify-around items-center text-center rounded-b-lg px-2">
                     <div>
                         <h2 className="text-base font-semibold">{title}</h2>
                         <span>{year}</span>

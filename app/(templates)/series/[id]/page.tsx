@@ -48,7 +48,7 @@ export default async function DetailPage(props: DetailProps) {
     const simplifiedSeries = simplifiedSeriesDetails(currentShow);
 
     return (
-        <section className="flex-[1_0_auto] mx-5 md:mx-8 lg:mx-10 xl:mx-15 showDetails">
+        <section className="flex-[1_0_auto] mx-5 md:mx-8 lg:mx-10 xl:mx-15 showDetails dark:text-[#EBECF0]">
             <div className="flex flex-col items-center justify-center">
                 <MainTitle title={currentShow.title} />
                 {currentShow.title != currentShow.originalTitle && <span>(Titre original&nbsp;:&nbsp;{currentShow.originalTitle})</span>}
@@ -66,7 +66,7 @@ export default async function DetailPage(props: DetailProps) {
 
             {currentShow.overview &&
                 <div className="flex flex-col mb-2">
-                    <span className="font-bold text-[#0f396d]">Synopsis&nbsp;:&nbsp;</span>
+                    <span className="font-bold text-[#0f396d] dark:text-[#4b83c6]">Synopsis&nbsp;:&nbsp;</span>
                     <p>{currentShow.overview}</p>
                 </div>
             }

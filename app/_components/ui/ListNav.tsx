@@ -18,7 +18,7 @@ export default function ListNav() {
 
                 return (
                     <Link href={link.href} key={link.href}
-                        className={`w-1/2 h-12 flex justify-center items-center border-b-1 ${link.href === '/favorites' ? 'border-r-1' : ''} ${isCurrentPage ? 'font-bold' : 'font-normal'}`}>
+                        className={`w-1/2 h-12 flex justify-center items-center border-b dark:text-[#EBECF0] ${link.href === '/favorites' ? 'border-r' : ''} ${isCurrentPage ? 'font-bold' : 'font-normal'}`}>
                         {link.title}
                     </Link>
                 )

@@ -21,21 +21,20 @@ export default function SeriesButton({ show }: { show: Series }) {
     }
 
     return (
-        <div>
+        <div className="flex flex-col md:flex-row md:w-2/3 w-1/2 justify-evenly items-center m-auto mb-8">
             <button
-                className={`px-4 py-2 rounded font-bold text-white hover:cursor-pointer transition-colors ${isFav ? 'bg-red-900 hover:bg-red-700' : 'bg-[#0f396d] hover:bg-blue-800'}`}
+                className={`px-4 py-2 rounded font-bold text-white dark:text-[#EBECF0] hover:cursor-pointer transition-colors mb-6 md:mb-0 ${isFav ? 'bg-red-900 hover:bg-red-700' : 'bg-[#0f396d] dark:bg-[#4b83c6] hover:bg-blue-800 dark:hover:bg-[#0f396d]'}`}
                 onClick={() => toggleStatus('fav')}
             >
                 {isFav ? 'Retirer des favoris' : 'Ajouter aux favoris'}
             </button>
 
             <button
-                className={`px-4 py-2 rounded font-bold text-white hover:cursor-pointer transition-colors ${isOnWatchlist ? 'bg-red-900 hover:bg-red-700' : 'bg-[#0f396d] hover:bg-blue-800'}`}
+                className={`px-4 py-2 rounded font-bold text-white dark:text-[#EBECF0] hover:cursor-pointer transition-colors ${isOnWatchlist ? 'bg-red-900 hover:bg-red-700' : 'bg-[#0f396d] dark:bg-[#4b83c6] hover:bg-blue-800 dark:hover:bg-[#0f396d]'}`}
                 onClick={() => toggleStatus('watchlist')}
             >
                 {isOnWatchlist ? 'Retirer de la Watchlist' : 'Ajouter à la Watchlist'}
             </button>
-
         </div>
     )
 }

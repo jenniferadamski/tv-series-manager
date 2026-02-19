@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faHeart, faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import Logo from "./Logo";
+import ThemeButton from "./ThemeButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
     return (
@@ -9,9 +10,23 @@ export default function Header() {
             <Logo />
 
             <nav className="flex flex-row w-3/4 md:w-1/2 justify-evenly">
-                <Link href="/search"><FontAwesomeIcon icon={faMagnifyingGlass} width="30" /></Link>
-                <Link href="/favorites"><FontAwesomeIcon icon={faHeart} width="30" /></Link>
-                <div><FontAwesomeIcon icon={faCircleHalfStroke} width="30" /></div>
+                <Link href="/search" className="flex items-center">
+                    <FontAwesomeIcon
+                        icon={faMagnifyingGlass}
+                        width={30}
+                        className="min-w-[30px] min-h-[30px] shrink-0 dark:text-[#EBECF0]"
+                    />
+                </Link>
+
+                <Link href="/favorites" className="flex items-center">
+                    <FontAwesomeIcon
+                        icon={faHeart}
+                        width={30}
+                        className="min-w-[30px] min-h-[30px] shrink-0 dark:text-[#EBECF0]"
+                    />
+                </Link>
+
+                <ThemeButton />
             </nav>
         </div>
     )
