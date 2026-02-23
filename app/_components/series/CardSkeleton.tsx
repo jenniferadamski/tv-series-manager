@@ -12,11 +12,11 @@ export default function CardSkeleton() {
                 className="min-h-[236px] md:min-h-[340px] min-[51rem]:min-h-[400px] min-[59rem]:min-h-[420px] min-[62rem]:min-h-[428px] lg:min-h-[420px] m-auto object-cover bg-neutral-200"
             />
 
-            <div className="h-[12rem] bg-white flex flex-col justify-around items-center text-center rounded-b-lg">
-                <span className="bg-neutral-300 h-[24px] w-[120px] rounded"></span>
-                <span className="bg-neutral-300 h-[20px] w-[35px] rounded"></span>
-                <span className="bg-neutral-300 h-[48px] w-[120px] md:w-[200px] rounded"></span>
-                <span className="bg-neutral-300 h-[24px] w-[90px] rounded"></span>
+            <div className="h-48 bg-white flex flex-col justify-around items-center text-center rounded-b-lg">
+                <span className="bg-neutral-300 h-6 w-[120px] rounded"></span>
+                <span className="bg-neutral-300 h-5 w-[35px] rounded"></span>
+                <span className="bg-neutral-300 h-12 w-[120px] md:w-[200px] rounded"></span>
+                <span className="bg-neutral-300 h-6 w-[90px] rounded"></span>
             </div>
         </li>
     )
