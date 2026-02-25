@@ -13,7 +13,7 @@ export default function Card({ id, title, poster, year, genres, rating }: Series
     const [img, setImg] = useState(poster ?? posterAlternative);
 
     return (
-        <li className="w-45/100 md:w-30/100 lg:w-20/100 mb-5 lg:mb-10 lg:mr-5 shadow-xl/10" key={id}>
+        <li className="w-45/100 md:w-30/100 lg:w-20/100 mb-5 lg:mb-10 lg:mr-5 shadow-xl/10 hover:shadow-xl/40 hover:scale-[1.03] hover:translate-y-1 active:scale-95" key={id}>
             <Link href={`/series/${id}`}>
                 <Image
                     src={img}
