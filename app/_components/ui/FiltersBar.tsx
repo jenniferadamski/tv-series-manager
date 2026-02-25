@@ -111,13 +111,13 @@ export default function FiltersBar({ genres, onSearch }: FiltersBarProps) {
                         placeholder="Min (ex: 1950)"
                         value={yearFrom}
                         onChange={e => setYearFrom(e.target.value)}
-                        className="w-[48%] md:w-1/3 lg:w-1/6 p-4 rounded-2xl border-2 border-transparent bg-white dark:bg-gray-700 shadow focus:border-[#0f396d] dark:focus:border-[#4b83c6] focus:outline-none transition-all dark:text-[#EBECF0] mt-2 md:mr-4"
+                        className="w-[48%] md:w-1/3 lg:w-1/6 p-4 rounded-2xl border-2 border-transparent bg-white dark:bg-gray-700 shadow focus:border-[#0f396d] dark:focus:border-[#4b83c6] focus:outline-none transition-all dark:text-[#EBECF0] mt-2 md:mr-4 dark:border dark:border-[#EBECF0]"
                     />
                     <input
                         placeholder="Max (ex: 2026)"
                         value={yearTo}
                         onChange={e => setYearTo(e.target.value)}
-                        className="w-[48%] md:w-1/3 lg:w-1/6 p-4 rounded-2xl border-2 border-transparent bg-white dark:bg-gray-700 shadow focus:border-[#0f396d] dark:focus:border-[#4b83c6] focus:outline-none transition-all dark:text-[#EBECF0]"
+                        className="w-[48%] md:w-1/3 lg:w-1/6 p-4 rounded-2xl border-2 border-transparent bg-white dark:bg-gray-700 shadow focus:border-[#0f396d] dark:focus:border-[#4b83c6] focus:outline-none transition-all dark:text-[#EBECF0] dark:border dark:border-[#EBECF0]"
                     />
                 </div>
 
