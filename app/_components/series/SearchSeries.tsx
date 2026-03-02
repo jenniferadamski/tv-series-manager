@@ -111,7 +111,6 @@ export default function SearchSeries({ genres }: SearchSeriesProps) {
                     ))}
                 </ul>
             </Suspense>
-
         </>
     );
 }

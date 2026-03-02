@@ -1,36 +1,35 @@
 import { Suspense } from "react";
 import Card from "./Card";
 import CardListSkeleton from "./CardListSkeleton";
+import Pagination from "../ui/Pagination";
 import type { Series } from "@/types/series";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-
-async function getPopularSeries() {
-    const res = await fetch(`${baseUrl}/api/popular`, {
-        next: { revalidate: 60 },
-    });
-
-    return res.json();
+interface CardListProps {
+    series: Series[];
+    page: number;
+    totalPages: number;
 }
 
-export default async function CardList() {
-    const series = await getPopularSeries();
-
+export default function CardList({ series, page, totalPages }: CardListProps) {
     return (
-        <Suspense fallback={<CardListSkeleton />}>
-            <ul className="flex flex-row justify-between flex-wrap">
-                {series.map((serie: Series) => (
-                    <Card
-                        id={serie.id}
-                        key={serie.id}
-                        title={serie.title}
-                        poster={serie.poster}
-                        year={serie.year}
-                        genres={serie.genres}
-                        rating={serie.rating}
-                    />
-                ))}
-            </ul>
-        </Suspense>
+        <>
+            <Suspense fallback={<CardListSkeleton />}>
+                <ul className="flex flex-row justify-between flex-wrap">
+                    {series.map((serie: Series) => (
+                        <Card
+                            id={serie.id}
+                            key={serie.id}
+                            title={serie.title}
+                            poster={serie.poster}
+                            year={serie.year}
+                            genres={serie.genres}
+                            rating={serie.rating}
+                        />
+                    ))}
+                </ul>
+            </Suspense>
+
+            <Pagination page={page} totalPages={totalPages} />
+        </>
     )
 }

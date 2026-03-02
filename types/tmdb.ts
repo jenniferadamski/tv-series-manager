@@ -9,6 +9,8 @@ export interface TmdbPopularSeries {
 
 export interface TmdbPopularSeriesResponse {
     results: TmdbPopularSeries[];
+    page: number;
+    total_pages: number; 
 }
 
 export interface TmdbGenre {

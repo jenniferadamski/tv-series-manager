@@ -142,7 +142,7 @@ export default function FiltersBar({ genres, onSearch }: FiltersBarProps) {
                 </select>
             </div>
 
-            <button onClick={handleSubmit} className="w-3/4 md:w-1/3 lg:w-1/6 mx-auto lg:mx-0 my-4 px-4 py-2 rounded text-white dark:text-[#EBECF0] cursor-pointer transition-colors bg-[#0f396d] dark:bg-[#4b83c6] hover:bg-blue-800 dark:hover:bg-[#0f396d]">
+            <button aria-label="Rechercher" onClick={handleSubmit} className="w-3/4 md:w-1/3 lg:w-1/6 mx-auto lg:mx-0 my-4 px-4 py-2 rounded shadow-xl/20 text-white dark:text-[#EBECF0] cursor-pointer transition-colors bg-[#0f396d] dark:bg-[#4b83c6] hover:bg-blue-800 dark:hover:bg-[#0f396d]">
                 Rechercher
             </button>
         </div>

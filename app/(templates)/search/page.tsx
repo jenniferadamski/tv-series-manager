@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     description: "Rechercher de nouvelles séries à regarder",
 };
 
-export default async function Search() {
+export default async function SearchPage() {
     const data = await tmdb<{ genres: { id: number; name: string }[] }>("/genre/tv/list");
 
     return (
