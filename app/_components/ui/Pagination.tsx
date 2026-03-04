@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,11 +12,12 @@ interface PaginationProps {
 export default function Pagination({ page, totalPages }: PaginationProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const pathname = usePathname();
 
-    function handlePageChange(newPage: number) {
+    const handlePageChange = (newPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set('page', newPage.toString());
-        router.push(`?${params.toString()}`);
+        router.push(`${pathname}?${params.toString()}`);
     }
 
     const displayedPages = [];
@@ -38,7 +39,6 @@ export default function Pagination({ page, totalPages }: PaginationProps) {
                 <FontAwesomeIcon icon={faAngleLeft} />
             </button>
 
-
             {displayedPages.map((currentPage) => (
                 <button
                     aria-label={`Page ${currentPage}`}
@@ -51,7 +51,6 @@ export default function Pagination({ page, totalPages }: PaginationProps) {
                     {currentPage}
                 </button>
             ))}
-
 
             <button
                 aria-label="Page suivante"

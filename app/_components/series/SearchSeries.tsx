@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import Card from "./Card";
 import CardListSkeleton from "./CardListSkeleton";
 import FiltersBar, { FiltersValues } from "../ui/FiltersBar";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import Pagination from "../ui/Pagination";
 import SearchBar from "../ui/SearchBar";
 import { useDebounce } from "@/hooks/useDebounce";
 import type { Series } from "@/types/series";
@@ -16,72 +18,86 @@ interface SearchSeriesProps {
 }
 
 export default function SearchSeries({ genres }: SearchSeriesProps) {
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    const query = searchParams.get('query') || '';
+    const page = Number(searchParams.get('page')) || 1;
+
     const [mode, setMode] = useState<SearchMode>('name');
-    const [query, setQuery] = useState('');
     const [results, setResults] = useState<Series[]>([]);
     const [loading, setLoading] = useState(false);
+    const [totalPages, setTotalPages] = useState(1);
     const debouncedQuery = useDebounce(query, 500);
 
-    async function handleFiltersSearch(filters: FiltersValues) {
-        setLoading(true);
+    const toggleMode = () => {
+        const newMode = mode === 'name' ? 'filters' : 'name';
+        setMode(newMode);
+        setResults([]);
+        router.push(pathname);
+    };
 
+    const updateSearch = (newQuery: string) => {
         const params = new URLSearchParams();
 
-        if (filters.genres.length) {
-            params.set('genres', filters.genres.join(','));
-        }
+        if (newQuery) params.set('query', newQuery);
 
-        if (filters.yearFrom) {
-            params.set('yearFrom', filters.yearFrom);
-        }
+        params.set('page', '1');
+        router.push(`${pathname}?${params.toString()}`);
+    };
 
-        if (filters.yearTo) {
-            params.set('yearTo', filters.yearTo);
-        }
+    async function handleFiltersSearch(filters: FiltersValues) {
+        const params = new URLSearchParams();
 
-        if (filters.status) {
-            params.set('status', filters.status);
-        }
+        if (filters.genres.length) params.set('genres', filters.genres.join(','));
+        if (filters.yearFrom) params.set('yearFrom', filters.yearFrom);
+        if (filters.yearTo) params.set('yearTo', filters.yearTo);
+        if (filters.status) params.set('status', filters.status);
 
-        const res = await fetch(`/api/tv/filters?${params.toString()}`);
-        const data = await res.json();
-
-        setResults(data);
-        setLoading(false);
+        router.push(`${pathname}?${params.toString()}`);
     }
 
     useEffect(() => {
         async function fetchData() {
-            setLoading(true);
+            const hasParams = searchParams.toString().length > 0;
 
-            let url = '';
-
-            if (mode === 'name' && debouncedQuery) {
-                url = `/api/tv/search?query=${debouncedQuery}`;
-            }
-
-            if (!url) {
+            if ((mode === 'name' && !debouncedQuery) || (mode === 'filters' && !hasParams)) {
                 setResults([]);
-                setLoading(false);
-
+                setTotalPages(1);
                 return;
             }
 
-            const res = await fetch(url);
-            const data = await res.json();
+            setLoading(true);
+            let url = '';
 
-            setResults(data);
-            setLoading(false);
+            if (mode === 'name' && debouncedQuery) {
+                url = `/api/tv/search?query=${debouncedQuery}&page=${page}`;
+            } else if (mode === 'filters') {
+                url = `/api/tv/filters?${searchParams.toString()}`;
+            }
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+
+                setResults(data.results || []);
+                setTotalPages(data.totalPages || 1);
+            } catch (error) {
+                console.error("Erreur fetch:", error);
+            } finally {
+                setLoading(false);
+            }
         }
 
         fetchData();
-    }, [mode, debouncedQuery]);
+    }, [searchParams, mode, page, debouncedQuery]);
 
     return (
         <>
             <div className="flex flex-col items-start">
                 {mode === 'name' ? (
-                    <SearchBar value={query} onChange={setQuery} />
+                    <SearchBar value={query} onChange={updateSearch} />
                 ) : (
                     <FiltersBar
                         genres={genres}
@@ -89,7 +105,7 @@ export default function SearchSeries({ genres }: SearchSeriesProps) {
                     />
                 )}
 
-                <button onClick={() => setMode(mode === 'name' ? 'filters' : 'name')} className="my-4 underline text-[#0f396d] dark:text-[#4b83c6] cursor-pointer">
+                <button onClick={toggleMode} className="my-4 underline text-[#0f396d] dark:text-[#4b83c6] cursor-pointer">
                     {mode === 'name' ? 'Effectuer une recherche par filtres' : 'Effectuer une recherche par nom'}
                 </button>
             </div>
@@ -111,6 +127,8 @@ export default function SearchSeries({ genres }: SearchSeriesProps) {
                     ))}
                 </ul>
             </Suspense>
+
+            {results.length > 0 && (<Pagination page={page} totalPages={totalPages} />)}
         </>
     );
 }

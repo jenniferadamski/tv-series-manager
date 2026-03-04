@@ -6,12 +6,17 @@ import type { Series } from "@/types/series";
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const query = searchParams.get('query');
+    const page = searchParams.get('page') ?? '1';
 
     if (!query){
-        return NextResponse.json([]);
+        return NextResponse.json({
+            page: 1,
+            totalPages: 1,
+            results: [],
+        });
     }
 
-    const data = await tmdb<TmdbPopularSeriesResponse>(`/search/tv?query=${encodeURIComponent(query)}`);
+    const data = await tmdb<TmdbPopularSeriesResponse>(`/search/tv?query=${encodeURIComponent(query)}&page=${page}`);
 
     const results: Series[] = data.results.map(show => ({
         id: show.id,
@@ -22,5 +27,9 @@ export async function GET(request: Request) {
         genres: [],
     }));
 
-    return NextResponse.json(results);
+    return NextResponse.json({
+        page: data.page,
+        totalPages: data.total_pages,
+        results,
+    });
 }

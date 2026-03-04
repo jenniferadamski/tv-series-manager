@@ -11,6 +11,7 @@ export async function GET(request: Request) {
     const status = searchParams.get('status');
     const MIN_YEAR = 1940;
     const CURRENT_YEAR = new Date().getFullYear();
+    const page = searchParams.get('page') ?? '1';
 
     const params = new URLSearchParams();
 
@@ -62,7 +63,7 @@ export async function GET(request: Request) {
         params.set('with_status', '3');
     }
 
-    const data = await tmdb<TmdbPopularSeriesResponse>(`/discover/tv?${params.toString()}`);
+    const data = await tmdb<TmdbPopularSeriesResponse>(`/discover/tv?${params.toString()}&page=${page}`);
     const ids = data.results.map(show => show.id);
     const detailedShows = await Promise.all(ids.map(id => tmdb<TmdbSeriesDetails>(`/tv/${id}`)));
 
@@ -75,5 +76,9 @@ export async function GET(request: Request) {
         genres: [],
     }));
 
-    return NextResponse.json(results);
+    return NextResponse.json({
+        page: data.page,
+        totalPages: data.total_pages,
+        results,
+    }); 
 }

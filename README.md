@@ -1,4 +1,4 @@
-# TV Series Manager (en cours de développement) - Project Overview
+# TV Series Manager - Project Overview
 
 ## But de l'application
 
