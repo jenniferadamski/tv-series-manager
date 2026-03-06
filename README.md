@@ -19,6 +19,7 @@ TV Series Manager est une application web permettant aux utilisateurs de découv
 * The Movie DataBase API
 * React Context API
 * Jest
+* React Testing Library
 * FontAwesome
 
 ## Objectif d'apprentissage
